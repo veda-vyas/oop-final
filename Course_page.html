@@ -2,6 +2,7 @@
   <meta charset="utf-8">
   <html lang="en">
     <head>
+		<title>Course page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -61,11 +62,34 @@
         $('#collapsible-panels a').click(function(e) {
             $(this).parent().next('#collapsible-panels div').slideToggle('slow');
             $(this).parent().toggleClass('active');
+			var time = new Date().getTime();
+			var date = new Date(time);
+			var titles = $(this).text();
+			var datemonth = date.getMonth()+1;
+			var datedate = date.getDate();
+			var datehours = date.getHours();
+			var dateminutes = date.getMinutes();
+			var datesec = date.getSeconds();
+			if(datemonth.toString().length != 2)
+				datemonth = '0'+datemonth.toString();
+			if(datedate.toString().length != 2)
+				datedate = '0'+datedate.toString();
+			if(datehours.toString().length != 2)
+				datehours = '0'+datehours.toString();
+			if(dateminutes.toString().length != 2)
+				dateminutes = '0'+dateminutes.toString();
+			if(datesec.toString().length != 2)
+				datesec = '0'+datesec.toString();
+			date = date.getFullYear() + "-" + datemonth + "-" + datedate + " " + datehours + ":" + dateminutes + ":" + datesec;
+			$.post('/logbox', {title: titles, ts: date}, function(data){
+				//alert("success "+titles+" "+date);
+			});
             e.preventDefault();
         });
       });
       $(".upload").click(function(){
         window.location.href = "browse.html";
       });
+	  
      </script>
   </html>
