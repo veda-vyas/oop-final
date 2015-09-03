@@ -5,9 +5,9 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /(.*\.(gif|png|jpg|ico|js|css))
+- url: /(.*\.(gif|png|jpg|ico|js|css|json))
   static_files: \1
-  upload: (.*\.(gif|png|jpg|ico|js|css))
+  upload: (.*\.(gif|png|jpg|ico|js|css|json))
 
 - url: .*
   script: main.app

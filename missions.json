@@ -1,0 +1,60 @@
+{
+	"1":	{
+				"title": "My Calendar",
+				"taskdescription": [
+									{
+										"type": "para",
+										"text": "Calendar application is one of the most common and popular software used for scheduling meetings. You will write a console based Java program to implement some of the most basic features of a Calendar app."
+									},
+									{
+										"type": "bullet",
+										"text": ["A user can create a calendar with a title for the calendar.", "Create an appointment slot in the calendar. An appointment slot is created by the user to indicate availability for a meeting. For example: I’m available on Aug 28 at 9 AM for 30 minutes. An appointment slot is created by taking the date with time as one parameter and the duration in minutes as the second parameter.", "Only one appointment slot can be created for a specified time and duration. There cannot be two overlapping appointment slots. For example, if an appointment slot is created from Aug 28, 2015 at 9 AM for 30 minutes, the program should not allow the creation of another appointment slot at Aug 28, 2015 at 9:15 AM for 45 minutes.", "User can book an appointment by providing the date, time, duration, name of the person and the location. The appointment can only be booked if the given arguments exactly match the available appointment slot. For example: Ram wants to book an appointment on Aug 28, 2015 at 9 AM for 30 minutes in IIIT-H. This appointment will be booked successfully as there is an available slot. Another person Shyam wants to book an appointment on Aug 28, 2014 at 9:20 AM for 30 minutes in IIIT-H. This appointment cannot be booked because there is no available slot.", "Cancel an existing appointment by specifying the date and time. Print the schedule for a given day with the booked and available appointment slots."]
+									}
+								],
+				"help": [
+							{
+								"subtitle": "Creating an Appointment Class",
+								"step": [
+											{
+												"type": "bullet",
+												"text": ["Create a class for Appointment.", "The properties of the Appointment object are date (which includes time) and duration of the appointment slot.", "The type of the property date is : java.util.Date (Read Javadoc for java.util.Date).", "The type of the property duration is : int.", "Create a constructor which sets the properties of date, duration and flag (by default false).", "Create getters and setters for the Appointment properties."]
+											},
+											{
+												"type": "para",
+												"text": "Test Cases:"
+											},
+											{
+												"type": "bullet",
+												"text": ["Create a test class for Appointment which is AppointmentTest class.", "Create an object for Appointment.", "Print the values of the Appointment properties using toString() method."]
+											}
+										]
+							},
+							{
+								"subtitle": "Creating MyCalendar Class",
+								"step": [
+											{
+												"type": "bullet",
+												"text": ["Create a class for MyCalendar.", "The properties of the MyCalendar object is slots (which contains list of Appointments) and name of the calendar.", "The type of the name is : String.", "The type of the slots is : ArrayList<Appointment>.", "Create a constructor for the MyCalendar which sets the name of the Calendar and create an object for the solts.", "The methods of the MyCalendar are as follows.", "createAppointmentSlot() which should return a boolean value. returns true if created successfully, otherwise false if it was not able to create.Check whether the appointment solts should not be overlapped. If overlapped, return false, otherwise true.", "Read the Date API.", "Update the Test program that you have created earlier by creating an object for MyCalendar and try for different test cases for creating an appointment slots.", "bookAppointment() which should return a boolean value. returns true if the appointment was created successfully, otherwise, false.", "Create a property isAvailable in the Appointment class and the type is : boolean. which represents whether the slot is booked or not (Initially sets to true).", "Iterate through the list of appointment slots to check for a requested appointment. If there is no slot return false.", "If the slot is available, check whether it is already booked or not. If booked return false, otherwise set isAvailable to false.", "Create properties name and location in the Appointment class and create setters and getters.", "set the name and location values.", "cancelAppointment() which should return a boolean value. returns true if the appointment was cancelled successfully, otherwise false.Check whether there is an appointment slot already booked, if yes, cancel it and then resets the values of isAvailable, name and location to defaults."]
+											}
+										]
+							},
+							{
+								"subtitle": "Creating MyCalendar Class",
+								"step": [
+											{
+												"type": "bullet",
+												"text": ["Create a class for Appointment.", "The properties of the Appointment object are date (which includes time) and duration of the appointment slot. The type of the property date is : java.util.Date (Read Javadoc for java.util.Date). The type of the property duration is : int.", "Create a constructor which sets the properties of date, duration and flag (by default false).", "Create getters and setters for the Appointment properties."]
+											},
+											{
+												"type": "para",
+												"text": "Test Cases:"
+											},
+											{
+												"type": "bullet",
+												"text": ["Create a test class for Appointment which is AppointmentTest class.", "Create an object for Appointment.", "Print the values of the Appointment properties using toString() method."]
+											}
+										]
+							}
+						]
+		}
+}

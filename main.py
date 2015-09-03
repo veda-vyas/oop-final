@@ -11,6 +11,7 @@ from google.appengine.ext import db
 import jinja2
 import sys
 import cgi
+import json
 
 # Setting up the Jinja environment to include html pages as templates
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -105,10 +106,19 @@ class LogboxHandler(BaseHandler):
       self.response.write(datas)
       self.response.write(username+" "+titlestr+" "+ts)
 
+class getCourseData(webapp2.RequestHandler):
+    def post(self):
+        mission = self.request.get("mission")
+        json_data = json.loads(open(os.path.join(os.path.dirname(__file__),'missions.json')).read())
+        ss = json.dumps(json_data[mission])
+        self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
+        self.response.write(ss)
+        
 app = webapp2.WSGIApplication ([
   ('/', MainHandler),
   ('/Course_page', CourseHandler),
   ('/addSession', SessionHandler),
   ('/logout', Logout),
-  ('/logbox', LogboxHandler)
+  ('/logbox', LogboxHandler),
+  ('/getmission', getCourseData)
   ], debug=True, config=config)
