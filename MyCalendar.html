@@ -1,0 +1,55 @@
+  <!DOCTYPE html>
+  <meta charset="utf-8">
+  <html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="jquery.min.js"></script>
+        <script src="jquery-ui.js"></script>
+    </head>
+    <style type="text/css">
+        a {
+            color:#000000 !important;
+            text-decoration:none;
+          }
+          a:hover{
+            text-decoration:none;
+          }
+    </style>
+    <body class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <a href="#"><h2 id="Heading"></h2></a>
+        </div>
+        <div class="col-md-4 text-right">
+          <br><br>
+          <a href="Course_page.html">Back to Home Page</a>
+        </div>
+      </div>
+       <hr>
+       <br>
+        <div id="contentbox" style="border:1px solid black; padding:20px; height:500px; overflow-y:scroll">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div id="collapsible-panels">
+                    <h4 class="well"><a href="#">Task Description</a></h4>  
+                    <div class="well-sm">
+                        <span id="taskDescription"></span>
+                        <button class="btn btn-success upload">Submit the Solution</button>
+                    </div>
+                    <h4 class="well"><a href="#">Need Help</a></h4>  
+                    <div id="needHelp" class="well-sm"></div>
+                </div>
+            </div>
+        </div>
+       <br>
+    </body>
+    <script type="text/javascript" src="parser.js"></script>
+    <script type="text/javascript">
+        $.getJSON( "MyCalendar.json", function( data ) {
+          parser(data);
+        });
+    </script>
+  </html>

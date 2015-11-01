@@ -1,0 +1,98 @@
+  <!DOCTYPE html>
+  <meta charset="utf-8">
+  <html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="CodeMirror-master/lib/codemirror.js"></script>
+        <script src="CodeMirror-master/lib/filesaver.js"></script>
+        <link rel="stylesheet" href="CodeMirror-master/lib/codemirror.css">
+        <script src="CodeMirror-master/mode/javascript/javascript.js"></script>
+    </head>
+    <body class="container">
+      <h1>JSON Generator</h1>
+      <hr>
+      <div class="row">
+        <div class="col-md-6 well">
+          <div style="height:450px; overflow-y:scroll;">
+            <span id="content">
+              <form id="Step0" class="form">
+                <input id="title" class="form-control" type="text" name="TaskTitle" placeholder="Enter Task Title">
+                <textarea id="description" class="form-control" name="TaskDescription" placeholder="Enter Task Description"></textarea>
+                <br>
+              </form>
+              <form id="Step1" class="form">
+                  <input type="text" class="form-control" id="step1Title" name="step1TaskTitle" placeholder="Step-1 Title">
+                  <textarea id="step1Description" class="form-control" name="step1TaskDescription" placeholder="Enter Step-1 Description"></textarea>
+                  <br>
+              </form>
+            </span>
+            <button id="add" type="submit" class="btn btn-success">+Add</button>
+            <button id="delete" type="submit" class="btn btn-danger">+Delete</button>
+          </div>
+        </div>
+        <div class="col-md-6 well">
+          <div id="editor" style="height:450px; overflow-y:scroll;"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <button id="generate" class="btn btn-success">Generate JSON</button>
+        </div>
+        <div class="col-md-6 text-center">
+          <button id="download" class="btn btn-primary">Download Now</button>
+        </div>
+      </div>
+    </body>
+    <script type="text/javascript">
+      $("#delete").hide();
+      var count = 1;
+      var myCodeMirror = CodeMirror(document.getElementById("editor"), {
+        lineNumbers: true,
+      });
+      var dataobj = {};
+      $("#add").click(function(){
+        count+=1;
+        $("#content").append('<form id="Step'+count+'" class="form"> <input type="text" class="form-control" name="Step'+count+'TaskTitle" id="step'+count+'Title" placeholder="Step-'+count+' Title"> <textarea name="Step'+count+'TaskDescription" id="step'+count+'Description" class="form-control" placeholder="Enter Step-'+count+' Description"></textarea> <br> </form>');
+        $("#delete").show();
+      });
+      $("#delete").click(function(){
+        if(count>1){
+          $("#Step"+count).remove();
+          count-=1;
+        }
+        else{
+          $(this).hide();
+        }
+      });
+      $("#generate").click(function(){
+        dataobj.Title = $("#title").val();
+        dataobj.TaskDescription = $("#description").val();
+        dataobj.NeedHelp = [];
+        var data = {};
+        for (var i=1; i<=count; i++){
+          //dataobj.NeedHelp.push($("#Step"+i).serializeArray()); 
+          var formdata = $("#Step"+i).serializeArray();
+          $(formdata ).each(function(index, obj){
+              data[obj.name.slice(5)] = obj.value;
+          }); 
+          dataobj.NeedHelp.push(data);
+          data = {}
+        }
+         myCodeMirror.getDoc().setValue(JSON.stringify(dataobj,null, 2));
+         dataobj = {};
+       });
+      $("#download").click(function(){
+        console.log(myCodeMirror.getValue());
+        var name = $("#title").val() + ".json"
+        var content = myCodeMirror.getValue();
+        var blob = new Blob([content], {
+            type: "text/plain;charset=utf-8;",
+        });
+        saveAs(blob, name);
+      });
+    </script>
+  </html>
